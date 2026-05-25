@@ -450,9 +450,14 @@
   .meal-group-name { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
   .meal-group-total { font-size: 0.8rem; color: var(--muted); }
   .meal-log-table {
-    width: 100%; border-collapse: collapse;
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 0 0 10px 10px; overflow: hidden; font-size: 0.88rem;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    font-size: 0.88rem;
   }
   .meal-log-table th {
     padding: 9px 14px; text-align: left; font-size: 0.72rem; font-weight: 700;
@@ -499,6 +504,74 @@
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 960px) {
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    * {
+      max-width: 100%;
+    }
+
+    .main {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .calc-container,
+    .tracker-page,
+    .food-page-inner,
+    .teaser-page {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .card,
+    .results-card,
+    .tracker-add-card,
+    .table-wrap,
+    .recipe-card,
+    .feat-card {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .input-row {
+      width: 100%;
+      min-width: 0;
+    }
+
+    input,
+    select {
+      min-width: 0;
+    }
+
+    .meal-log-table {
+      display: block;
+      overflow-x: auto;
+      width: 100%;
+    }
+
+    .meal-log-table table {
+      width: 100%;
+    }
+
+    .meal-log-table td,
+    .meal-log-table th {
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .meal-log-table td:last-child,
+    .meal-log-table th:last-child {
+      min-width: 44px;
+      text-align: center;
+    }
+  }
+
 </style>
 </head>
 <body>
