@@ -19,193 +19,107 @@
     --muted: #7a8199;
     --radius: 16px;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(15,17,23,0.85);
-    backdrop-filter: blur(20px);
+    background: rgba(15,17,23,0.88); backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 0;
-    padding: 0 32px;
-    height: 64px;
+    display: flex; align-items: center; padding: 0 32px; height: 64px; gap: 12px;
   }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: var(--accent);
-    letter-spacing: -1px;
-    margin-right: auto;
-  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--accent); letter-spacing: -1px; margin-right: auto; }
   .nav-logo span { color: var(--text); }
   .nav-tabs { display: flex; gap: 4px; }
-  .nav-tab {
-    padding: 8px 20px;
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s;
-  }
+  .nav-tab { padding: 8px 20px; border: none; background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; cursor: pointer; border-radius: 8px; transition: all 0.2s; }
   .nav-tab:hover { background: var(--surface2); color: var(--text); }
   .nav-tab.active { background: var(--accent); color: #0f1117; font-weight: 600; }
+
+  /* UNIT SYSTEM TOGGLE in nav */
+  .unit-system-toggle {
+    display: flex; align-items: center; gap: 0;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; flex-shrink: 0;
+  }
+  .ust-btn {
+    padding: 7px 14px; border: none; background: transparent;
+    color: var(--muted); font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .ust-btn.active { background: var(--accent); color: #0f1117; }
+  .ust-divider { width: 1px; background: var(--border); height: 20px; flex-shrink: 0; }
 
   /* PAGES */
   .page { display: none; padding-top: 88px; min-height: 100vh; }
   .page.active { display: block; }
 
   /* HERO */
-  .hero {
-    text-align: center;
-    padding: 60px 24px 40px;
-    position: relative;
-  }
+  .hero { text-align: center; padding: 60px 24px 40px; position: relative; }
   .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 50%; transform: translateX(-50%);
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
     width: 600px; height: 300px;
     background: radial-gradient(ellipse at 50% 0%, rgba(200,245,106,0.12) 0%, transparent 70%);
     pointer-events: none;
   }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -2px;
-    margin-bottom: 16px;
-  }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.1; letter-spacing: -2px; margin-bottom: 16px; }
   .hero h1 em { color: var(--accent); font-style: normal; }
   .hero p { color: var(--muted); font-size: 1.05rem; max-width: 480px; margin: 0 auto; line-height: 1.6; }
 
-  /* CALCULATOR LAYOUT */
-  .calc-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 24px 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  @media (max-width: 680px) {
-    .calc-container { grid-template-columns: 1fr; }
-  }
+  /* CALC */
+  .calc-container { max-width: 900px; margin: 0 auto; padding: 0 24px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 680px) { .calc-container { grid-template-columns: 1fr; } nav { padding: 0 16px; } .ust-btn { padding: 7px 10px; } }
 
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-  }
-  .card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .card-title .dot {
-    width: 10px; height: 10px; border-radius: 50%;
-  }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .card-title .dot { width: 10px; height: 10px; border-radius: 50%; }
 
   .field { margin-bottom: 18px; }
-  label {
-    display: block;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 8px;
-  }
-  .input-row { display: flex; gap: 8px; }
+  label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .input-row { display: flex; gap: 8px; align-items: stretch; }
   input[type=number], select {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    padding: 12px 16px;
-    outline: none;
-    transition: border-color 0.2s;
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text); font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; padding: 12px 16px; outline: none; transition: border-color 0.2s;
     -moz-appearance: textfield;
   }
   input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
   input[type=number]:focus, select:focus { border-color: var(--accent); }
-  .unit-badge {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 0.85rem;
-    color: var(--muted);
-    white-space: nowrap;
+
+  /* Unit toggle pill on each input */
+  .unit-pill {
     display: flex; align-items: center;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; flex-shrink: 0;
   }
+  .unit-pill-btn {
+    padding: 0 11px; height: 100%; border: none; background: transparent;
+    color: var(--muted); font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .unit-pill-btn.active { background: var(--surface2); color: var(--accent); }
+  .unit-pill-sep { width: 1px; background: var(--border); height: 60%; flex-shrink: 0; }
+
+  /* Imperial sub-inputs (ft+in) */
+  .imperial-double { display: flex; gap: 6px; flex: 1; }
+  .imperial-double input { flex: 1; min-width: 0; }
+  .unit-badge { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; font-size: 0.85rem; color: var(--muted); white-space: nowrap; display: flex; align-items: center; }
+
+  /* Converted hint */
+  .conv-hint { font-size: 0.76rem; color: var(--accent); margin-top: 5px; min-height: 16px; font-weight: 500; }
 
   .goal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .goal-btn {
-    padding: 10px 8px;
-    background: var(--surface2);
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    color: var(--muted);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-  }
+  .goal-btn { padding: 10px 8px; background: var(--surface2); border: 2px solid var(--border); border-radius: 10px; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; }
   .goal-btn:hover { border-color: var(--accent); color: var(--text); }
   .goal-btn.active { border-color: var(--accent); background: rgba(200,245,106,0.1); color: var(--accent); }
 
-  .calc-btn {
-    grid-column: 1 / -1;
-    width: 100%;
-    padding: 16px;
-    background: var(--accent);
-    border: none;
-    border-radius: 12px;
-    color: #0f1117;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-  }
+  .calc-btn { grid-column: 1 / -1; width: 100%; padding: 16px; background: var(--accent); border: none; border-radius: 12px; color: #0f1117; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em; }
   .calc-btn:hover { background: #d4f87a; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(200,245,106,0.25); }
   .calc-btn:active { transform: translateY(0); }
 
-  /* BMI BANNER */
-  .bmi-banner {
-    display: none;
-    grid-column: 1 / -1;
-    padding: 18px 24px;
-    border-radius: 12px;
-    border: 1px solid;
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
+  .bmi-banner { display: none; grid-column: 1 / -1; padding: 18px 24px; border-radius: 12px; border: 1px solid; font-size: 0.95rem; line-height: 1.5; }
   .bmi-banner.show { display: block; }
   .bmi-banner.healthy { border-color: rgba(200,245,106,0.4); background: rgba(200,245,106,0.08); color: var(--accent); }
   .bmi-banner.underweight { border-color: rgba(126,200,227,0.4); background: rgba(126,200,227,0.08); color: var(--accent2); }
@@ -213,162 +127,60 @@
   .bmi-banner.obese { border-color: rgba(245,106,106,0.4); background: rgba(245,106,106,0.08); color: var(--accent4); }
   .bmi-banner strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
 
-  /* RESULTS */
-  .results-card {
-    display: none;
-    grid-column: 1 / -1;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-  }
+  .results-card { display: none; grid-column: 1 / -1; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
   .results-card.show { display: block; }
-  .results-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 24px;
-    color: var(--text);
-  }
-
-  .macro-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-  .macro-item {
-    background: var(--surface2);
-    border-radius: 12px;
-    padding: 18px;
-    text-align: center;
-    border: 1px solid var(--border);
-    transition: transform 0.2s;
-  }
+  .results-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 24px; }
+  .macro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 24px; }
+  .macro-item { background: var(--surface2); border-radius: 12px; padding: 18px; text-align: center; border: 1px solid var(--border); transition: transform 0.2s; animation: fadeUp 0.4s ease both; }
   .macro-item:hover { transform: translateY(-2px); }
-  .macro-val {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
+  .macro-item:nth-child(1){animation-delay:.05s} .macro-item:nth-child(2){animation-delay:.1s} .macro-item:nth-child(3){animation-delay:.15s} .macro-item:nth-child(4){animation-delay:.2s}
+  .macro-val { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1; margin-bottom: 4px; }
   .macro-unit { font-size: 0.8rem; color: var(--muted); }
   .macro-label { font-size: 0.85rem; font-weight: 600; margin-top: 6px; color: var(--muted); }
-
-  .cal-highlight {
-    background: linear-gradient(135deg, rgba(200,245,106,0.12), rgba(200,245,106,0.04));
-    border: 1px solid rgba(200,245,106,0.3);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 20px;
-  }
+  .cal-highlight { background: linear-gradient(135deg, rgba(200,245,106,0.12), rgba(200,245,106,0.04)); border: 1px solid rgba(200,245,106,0.3); border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px; }
   .cal-highlight .big { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--accent); }
   .cal-highlight .label { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
-
   .note { font-size: 0.82rem; color: var(--muted); line-height: 1.6; padding-top: 16px; border-top: 1px solid var(--border); }
   .note strong { color: var(--text); }
 
-  /* FOOD TABLES PAGE */
-  .food-page-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px 60px;
-  }
-
+  /* FOOD TABLES */
+  .food-page-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
   .nutrient-section { margin-bottom: 48px; }
-  .section-header {
-    display: flex; align-items: center; gap: 14px;
-    margin-bottom: 20px;
-  }
-  .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-  }
-  .section-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem;
-    flex-shrink: 0;
-  }
-
-  .food-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-  .food-table thead tr {
-    background: var(--surface2);
-  }
-  .food-table th {
-    padding: 12px 16px;
-    text-align: left;
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    border-bottom: 1px solid var(--border);
-  }
-  .food-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(44,51,80,0.5);
-    color: var(--text);
-  }
+  .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; }
+  .section-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+  .food-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .food-table thead tr { background: var(--surface2); }
+  .food-table th { padding: 12px 16px; text-align: left; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .food-table td { padding: 12px 16px; border-bottom: 1px solid rgba(44,51,80,0.5); color: var(--text); }
   .food-table tbody tr:hover { background: rgba(255,255,255,0.02); }
   .food-table tbody tr:last-child td { border-bottom: none; }
   .food-table .amount { font-weight: 600; }
-  .food-table .highlight-cell {
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-  }
-  .badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-  }
+  .food-table .highlight-cell { font-weight: 700; font-family: 'Playfair Display', serif; font-size: 1rem; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
   .badge-veg { background: rgba(200,245,106,0.15); color: var(--accent); }
   .badge-nveg { background: rgba(245,106,106,0.12); color: #f56a6a; }
-  .table-wrap {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
+  .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 
-  /* SCROLLBAR */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-  /* ANIMATE IN */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .macro-item { animation: fadeUp 0.4s ease both; }
-  .macro-item:nth-child(1) { animation-delay: 0.05s; }
-  .macro-item:nth-child(2) { animation-delay: 0.1s; }
-  .macro-item:nth-child(3) { animation-delay: 0.15s; }
-  .macro-item:nth-child(4) { animation-delay: 0.2s; }
-  .macro-item:nth-child(5) { animation-delay: 0.25s; }
-
-  .divider { height: 1px; background: var(--border); margin: 0 0 20px; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-logo">Nutri<span>Calc</span></div>
+  <!-- Global unit system switcher -->
+  <div class="unit-system-toggle">
+    <button class="ust-btn active" id="sys-metric" onclick="setUnitSystem('metric')">Metric</button>
+    <div class="ust-divider"></div>
+    <button class="ust-btn" id="sys-imperial" onclick="setUnitSystem('imperial')">Imperial</button>
+  </div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showPage('calculator')">Calculator</button>
-    <button class="nav-tab" onclick="showPage('foods')">Food Sources</button>
+    <button class="nav-tab active" onclick="showPage('calculator',event)">Calculator</button>
+    <button class="nav-tab" onclick="showPage('foods',event)">Food Sources</button>
   </div>
 </nav>
 
@@ -376,42 +188,64 @@
 <div class="page active" id="page-calculator">
   <div class="hero">
     <h1>Your Daily<br><em>Nutrition Targets</em></h1>
-    <p>Enter your stats and goal to get personalized calorie and macro recommendations.</p>
+    <p>Enter your stats and goal to get personalised calorie and macro recommendations.</p>
   </div>
 
   <div class="calc-container">
 
-    <!-- Left card: Body stats -->
+    <!-- Body Stats card -->
     <div class="card">
       <div class="card-title">
         <span class="dot" style="background:var(--accent)"></span>
         Body Stats
       </div>
 
+      <!-- HEIGHT -->
       <div class="field">
         <label>Height</label>
-        <div class="input-row">
-          <input type="number" id="height" placeholder="e.g. 165" min="100" max="250">
+        <div class="input-row" id="height-row-metric">
+          <input type="number" id="height-cm" placeholder="e.g. 165" min="100" max="250" oninput="liveConvert('height')">
           <span class="unit-badge">cm</span>
         </div>
+        <div class="input-row" id="height-row-imperial" style="display:none">
+          <div class="imperial-double">
+            <input type="number" id="height-ft" placeholder="ft" min="3" max="8" oninput="liveConvert('height')">
+            <input type="number" id="height-in" placeholder="in" min="0" max="11" oninput="liveConvert('height')">
+          </div>
+          <span class="unit-badge" style="align-self:stretch">ft / in</span>
+        </div>
+        <div class="conv-hint" id="hint-height"></div>
       </div>
 
+      <!-- CURRENT WEIGHT -->
       <div class="field">
         <label>Current Weight</label>
-        <div class="input-row">
-          <input type="number" id="current-weight" placeholder="e.g. 72" min="20" max="300">
+        <div class="input-row" id="cw-row-metric">
+          <input type="number" id="cw-kg" placeholder="e.g. 72" min="20" max="300" oninput="liveConvert('cw')">
           <span class="unit-badge">kg</span>
         </div>
+        <div class="input-row" id="cw-row-imperial" style="display:none">
+          <input type="number" id="cw-lb" placeholder="e.g. 159" min="44" max="660" oninput="liveConvert('cw')">
+          <span class="unit-badge">lbs</span>
+        </div>
+        <div class="conv-hint" id="hint-cw"></div>
       </div>
 
+      <!-- GOAL WEIGHT -->
       <div class="field">
         <label>Goal Weight</label>
-        <div class="input-row">
-          <input type="number" id="goal-weight" placeholder="e.g. 65" min="20" max="300">
+        <div class="input-row" id="gw-row-metric">
+          <input type="number" id="gw-kg" placeholder="e.g. 65" min="20" max="300" oninput="liveConvert('gw')">
           <span class="unit-badge">kg</span>
         </div>
+        <div class="input-row" id="gw-row-imperial" style="display:none">
+          <input type="number" id="gw-lb" placeholder="e.g. 143" min="44" max="660" oninput="liveConvert('gw')">
+          <span class="unit-badge">lbs</span>
+        </div>
+        <div class="conv-hint" id="hint-gw"></div>
       </div>
 
+      <!-- AGE -->
       <div class="field">
         <label>Age</label>
         <div class="input-row">
@@ -420,6 +254,7 @@
         </div>
       </div>
 
+      <!-- SEX -->
       <div class="field">
         <label>Sex</label>
         <select id="sex">
@@ -429,11 +264,11 @@
       </div>
     </div>
 
-    <!-- Right card: Activity & Goal -->
+    <!-- Activity & Goal card -->
     <div class="card">
       <div class="card-title">
         <span class="dot" style="background:var(--accent2)"></span>
-        Activity & Goal
+        Activity &amp; Goal
       </div>
 
       <div class="field">
@@ -450,10 +285,10 @@
       <div class="field" style="margin-top:8px;">
         <label>Primary Goal</label>
         <div class="goal-grid">
-          <button class="goal-btn" onclick="selectGoal(this,'lose')" id="goal-lose">🔥 Lose Fat</button>
-          <button class="goal-btn active" onclick="selectGoal(this,'maintain')" id="goal-maintain">⚖️ Maintain</button>
-          <button class="goal-btn" onclick="selectGoal(this,'gain')" id="goal-gain">💪 Build Muscle</button>
-          <button class="goal-btn" onclick="selectGoal(this,'recomp')" id="goal-recomp">🔄 Recomp</button>
+          <button class="goal-btn" onclick="selectGoal(this,'lose')">🔥 Lose Fat</button>
+          <button class="goal-btn active" onclick="selectGoal(this,'maintain')">⚖️ Maintain</button>
+          <button class="goal-btn" onclick="selectGoal(this,'gain')">💪 Build Muscle</button>
+          <button class="goal-btn" onclick="selectGoal(this,'recomp')">🔄 Recomp</button>
         </div>
       </div>
 
@@ -471,18 +306,16 @@
     <!-- BMI Banner -->
     <div class="bmi-banner" id="bmi-banner"></div>
 
-    <!-- Calculate Button -->
+    <!-- Calculate -->
     <button class="calc-btn" onclick="calculate()">Calculate My Nutrition Targets →</button>
 
     <!-- Results -->
     <div class="results-card" id="results-card">
       <div class="results-title">Your Daily Nutrition Plan</div>
-
       <div class="cal-highlight">
         <div class="big" id="res-cal">—</div>
         <div class="label">Calories per day (kcal)</div>
       </div>
-
       <div class="macro-grid">
         <div class="macro-item">
           <div class="macro-val" id="res-protein" style="color:var(--accent)">—</div>
@@ -505,7 +338,6 @@
           <div class="macro-label">Fibre</div>
         </div>
       </div>
-
       <div class="note" id="res-note"></div>
     </div>
 
@@ -516,152 +348,103 @@
 <div class="page" id="page-foods">
   <div class="hero">
     <h1>Food <em>Nutrient</em><br>Reference</h1>
-    <p>Good sources of each macronutrient with protein, carb, fat and fibre content per 100g serving.</p>
+    <p>Good sources of each macronutrient with full macro content per serving.</p>
   </div>
-
   <div class="food-page-inner">
 
     <!-- PROTEIN -->
     <div class="nutrient-section">
       <div class="section-header">
-        <div class="section-icon" style="background:rgba(200,245,106,0.12); color:var(--accent)">🥩</div>
+        <div class="section-icon" style="background:rgba(200,245,106,0.12);color:var(--accent)">🥩</div>
         <h2 style="color:var(--accent)">Protein Sources</h2>
       </div>
       <div class="table-wrap">
-        <table class="food-table">
-          <thead>
-            <tr>
-              <th>Food</th>
-              <th>Serving</th>
-              <th>Protein (g)</th>
-              <th>Carbs (g)</th>
-              <th>Fat (g)</th>
-              <th>Fibre (g)</th>
-              <th>Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Chicken Breast (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">31</td><td>0</td><td>3.6</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
-            <tr><td>Eggs (whole)</td><td class="amount">2 large (~100g)</td><td class="highlight-cell" style="color:var(--accent)">13</td><td>1</td><td>10</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
-            <tr><td>Tuna (canned in water)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">26</td><td>0</td><td>1</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
-            <tr><td>Paneer (Cottage Cheese)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">18</td><td>1.2</td><td>20</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Greek Yoghurt (low fat)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">10</td><td>3.6</td><td>0.4</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Lentils / Dal (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">9</td><td>20</td><td>0.4</td><td>7.9</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Chickpeas / Chana (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">8.9</td><td>27</td><td>2.6</td><td>7.6</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Tofu (firm)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">8</td><td>2</td><td>4.8</td><td>0.3</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Whey Protein (scoop ~30g)</td><td class="amount">30g</td><td class="highlight-cell" style="color:var(--accent)">24</td><td>2</td><td>1.5</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Skimmed Milk</td><td class="amount">240ml</td><td class="highlight-cell" style="color:var(--accent)">8.4</td><td>12</td><td>0.2</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Rajma / Kidney Beans (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">8.7</td><td>23</td><td>0.5</td><td>6.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Salmon (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">25</td><td>0</td><td>13</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
-          </tbody>
-        </table>
+        <table class="food-table"><thead><tr><th>Food</th><th>Serving</th><th>Protein (g)</th><th>Carbs (g)</th><th>Fat (g)</th><th>Fibre (g)</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td>Chicken Breast (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">31</td><td>0</td><td>3.6</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
+          <tr><td>Eggs (whole)</td><td class="amount">2 large (~100g)</td><td class="highlight-cell" style="color:var(--accent)">13</td><td>1</td><td>10</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
+          <tr><td>Tuna (canned in water)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">26</td><td>0</td><td>1</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
+          <tr><td>Paneer (Cottage Cheese)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">18</td><td>1.2</td><td>20</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Greek Yoghurt (low fat)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">10</td><td>3.6</td><td>0.4</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Lentils / Dal (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">9</td><td>20</td><td>0.4</td><td>7.9</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Chickpeas / Chana (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">8.9</td><td>27</td><td>2.6</td><td>7.6</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Tofu (firm)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">8</td><td>2</td><td>4.8</td><td>0.3</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Whey Protein (scoop)</td><td class="amount">30g</td><td class="highlight-cell" style="color:var(--accent)">24</td><td>2</td><td>1.5</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Skimmed Milk</td><td class="amount">240ml</td><td class="highlight-cell" style="color:var(--accent)">8.4</td><td>12</td><td>0.2</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Rajma / Kidney Beans (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">8.7</td><td>23</td><td>0.5</td><td>6.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Salmon (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent)">25</td><td>0</td><td>13</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
+        </tbody></table>
       </div>
     </div>
 
     <!-- CARBS -->
     <div class="nutrient-section">
       <div class="section-header">
-        <div class="section-icon" style="background:rgba(126,200,227,0.12); color:var(--accent2)">🌾</div>
+        <div class="section-icon" style="background:rgba(126,200,227,0.12);color:var(--accent2)">🌾</div>
         <h2 style="color:var(--accent2)">Carbohydrate Sources</h2>
       </div>
       <div class="table-wrap">
-        <table class="food-table">
-          <thead>
-            <tr>
-              <th>Food</th>
-              <th>Serving</th>
-              <th>Carbs (g)</th>
-              <th>Protein (g)</th>
-              <th>Fat (g)</th>
-              <th>Fibre (g)</th>
-              <th>Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Brown Rice (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">23</td><td>2.6</td><td>0.9</td><td>1.8</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Oats (rolled, dry)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">67</td><td>13</td><td>7</td><td>10</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Whole Wheat Roti</td><td class="amount">1 medium (~40g)</td><td class="highlight-cell" style="color:var(--accent2)">20</td><td>3</td><td>1</td><td>2.5</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Sweet Potato (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">20</td><td>1.6</td><td>0.1</td><td>3</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Banana</td><td class="amount">1 medium (~120g)</td><td class="highlight-cell" style="color:var(--accent2)">27</td><td>1.3</td><td>0.3</td><td>3.1</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Quinoa (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">21</td><td>4.4</td><td>1.9</td><td>2.8</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>White Rice (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">28</td><td>2.7</td><td>0.3</td><td>0.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Whole Wheat Bread</td><td class="amount">1 slice (~30g)</td><td class="highlight-cell" style="color:var(--accent2)">13</td><td>3.9</td><td>1</td><td>1.9</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Apple</td><td class="amount">1 medium (~180g)</td><td class="highlight-cell" style="color:var(--accent2)">25</td><td>0.5</td><td>0.3</td><td>4.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Corn / Maize (boiled)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">19</td><td>3.4</td><td>1.5</td><td>2</td><td><span class="badge badge-veg">Veg</span></td></tr>
-          </tbody>
-        </table>
+        <table class="food-table"><thead><tr><th>Food</th><th>Serving</th><th>Carbs (g)</th><th>Protein (g)</th><th>Fat (g)</th><th>Fibre (g)</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td>Brown Rice (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">23</td><td>2.6</td><td>0.9</td><td>1.8</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Oats (rolled, dry)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">67</td><td>13</td><td>7</td><td>10</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Whole Wheat Roti</td><td class="amount">1 medium (~40g)</td><td class="highlight-cell" style="color:var(--accent2)">20</td><td>3</td><td>1</td><td>2.5</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Sweet Potato (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">20</td><td>1.6</td><td>0.1</td><td>3</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Banana</td><td class="amount">1 medium (~120g)</td><td class="highlight-cell" style="color:var(--accent2)">27</td><td>1.3</td><td>0.3</td><td>3.1</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Quinoa (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">21</td><td>4.4</td><td>1.9</td><td>2.8</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>White Rice (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">28</td><td>2.7</td><td>0.3</td><td>0.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Whole Wheat Bread</td><td class="amount">1 slice (~30g)</td><td class="highlight-cell" style="color:var(--accent2)">13</td><td>3.9</td><td>1</td><td>1.9</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Apple</td><td class="amount">1 medium (~180g)</td><td class="highlight-cell" style="color:var(--accent2)">25</td><td>0.5</td><td>0.3</td><td>4.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Corn / Maize (boiled)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent2)">19</td><td>3.4</td><td>1.5</td><td>2</td><td><span class="badge badge-veg">Veg</span></td></tr>
+        </tbody></table>
       </div>
     </div>
 
     <!-- FIBRE -->
     <div class="nutrient-section">
       <div class="section-header">
-        <div class="section-icon" style="background:rgba(167,139,250,0.12); color:#a78bfa">🥦</div>
+        <div class="section-icon" style="background:rgba(167,139,250,0.12);color:#a78bfa">🥦</div>
         <h2 style="color:#a78bfa">Fibre Sources</h2>
       </div>
       <div class="table-wrap">
-        <table class="food-table">
-          <thead>
-            <tr>
-              <th>Food</th>
-              <th>Serving</th>
-              <th>Fibre (g)</th>
-              <th>Protein (g)</th>
-              <th>Carbs (g)</th>
-              <th>Fat (g)</th>
-              <th>Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Chia Seeds</td><td class="amount">30g (2 tbsp)</td><td class="highlight-cell" style="color:#a78bfa">10.6</td><td>5.3</td><td>12</td><td>8.7</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Lentils / Dal (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">7.9</td><td>9</td><td>20</td><td>0.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Kidney Beans / Rajma</td><td class="amount">100g cooked</td><td class="highlight-cell" style="color:#a78bfa">6.4</td><td>8.7</td><td>23</td><td>0.5</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Chickpeas (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">7.6</td><td>8.9</td><td>27</td><td>2.6</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Oats (rolled, dry)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">10</td><td>13</td><td>67</td><td>7</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Broccoli (steamed)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">2.6</td><td>2.8</td><td>7</td><td>0.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Peas (boiled)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">5.5</td><td>5</td><td>14</td><td>0.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Flaxseeds (ground)</td><td class="amount">30g</td><td class="highlight-cell" style="color:#a78bfa">8</td><td>5.7</td><td>8</td><td>11</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Spinach (raw)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">2.2</td><td>2.9</td><td>3.6</td><td>0.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Avocado</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">6.7</td><td>2</td><td>9</td><td>15</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Almonds</td><td class="amount">30g (~23 almonds)</td><td class="highlight-cell" style="color:#a78bfa">3.5</td><td>6</td><td>6</td><td>14</td><td><span class="badge badge-veg">Veg</span></td></tr>
-          </tbody>
-        </table>
+        <table class="food-table"><thead><tr><th>Food</th><th>Serving</th><th>Fibre (g)</th><th>Protein (g)</th><th>Carbs (g)</th><th>Fat (g)</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td>Chia Seeds</td><td class="amount">30g (2 tbsp)</td><td class="highlight-cell" style="color:#a78bfa">10.6</td><td>5.3</td><td>12</td><td>8.7</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Lentils / Dal (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">7.9</td><td>9</td><td>20</td><td>0.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Kidney Beans / Rajma</td><td class="amount">100g cooked</td><td class="highlight-cell" style="color:#a78bfa">6.4</td><td>8.7</td><td>23</td><td>0.5</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Chickpeas (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">7.6</td><td>8.9</td><td>27</td><td>2.6</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Oats (rolled, dry)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">10</td><td>13</td><td>67</td><td>7</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Broccoli (steamed)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">2.6</td><td>2.8</td><td>7</td><td>0.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Peas (boiled)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">5.5</td><td>5</td><td>14</td><td>0.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Flaxseeds (ground)</td><td class="amount">30g</td><td class="highlight-cell" style="color:#a78bfa">8</td><td>5.7</td><td>8</td><td>11</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Spinach (raw)</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">2.2</td><td>2.9</td><td>3.6</td><td>0.4</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Avocado</td><td class="amount">100g</td><td class="highlight-cell" style="color:#a78bfa">6.7</td><td>2</td><td>9</td><td>15</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Almonds</td><td class="amount">30g (~23 almonds)</td><td class="highlight-cell" style="color:#a78bfa">3.5</td><td>6</td><td>6</td><td>14</td><td><span class="badge badge-veg">Veg</span></td></tr>
+        </tbody></table>
       </div>
     </div>
 
     <!-- FATS -->
     <div class="nutrient-section">
       <div class="section-header">
-        <div class="section-icon" style="background:rgba(245,194,106,0.12); color:var(--accent3)">🥑</div>
+        <div class="section-icon" style="background:rgba(245,194,106,0.12);color:var(--accent3)">🥑</div>
         <h2 style="color:var(--accent3)">Healthy Fat Sources</h2>
       </div>
       <div class="table-wrap">
-        <table class="food-table">
-          <thead>
-            <tr>
-              <th>Food</th>
-              <th>Serving</th>
-              <th>Fat (g)</th>
-              <th>Protein (g)</th>
-              <th>Carbs (g)</th>
-              <th>Fibre (g)</th>
-              <th>Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Avocado</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent3)">15</td><td>2</td><td>9</td><td>6.7</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Almonds</td><td class="amount">30g</td><td class="highlight-cell" style="color:var(--accent3)">14</td><td>6</td><td>6</td><td>3.5</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Walnuts</td><td class="amount">30g (~7 halves)</td><td class="highlight-cell" style="color:var(--accent3)">18.5</td><td>4.3</td><td>3.9</td><td>1.9</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Peanut Butter (natural)</td><td class="amount">2 tbsp (~32g)</td><td class="highlight-cell" style="color:var(--accent3)">16</td><td>8</td><td>6</td><td>1.9</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Chia Seeds</td><td class="amount">30g</td><td class="highlight-cell" style="color:var(--accent3)">8.7</td><td>5.3</td><td>12</td><td>10.6</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Flaxseeds (ground)</td><td class="amount">30g</td><td class="highlight-cell" style="color:var(--accent3)">11</td><td>5.7</td><td>8</td><td>8</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Olive Oil (extra virgin)</td><td class="amount">1 tbsp (~14ml)</td><td class="highlight-cell" style="color:var(--accent3)">14</td><td>0</td><td>0</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Eggs (whole)</td><td class="amount">2 large (~100g)</td><td class="highlight-cell" style="color:var(--accent3)">10</td><td>13</td><td>1</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
-            <tr><td>Salmon (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent3)">13</td><td>25</td><td>0</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
-            <tr><td>Paneer (Cottage Cheese)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent3)">20</td><td>18</td><td>1.2</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
-            <tr><td>Coconut (fresh / scraped)</td><td class="amount">30g</td><td class="highlight-cell" style="color:var(--accent3)">10</td><td>1.1</td><td>4.3</td><td>2.7</td><td><span class="badge badge-veg">Veg</span></td></tr>
-          </tbody>
-        </table>
+        <table class="food-table"><thead><tr><th>Food</th><th>Serving</th><th>Fat (g)</th><th>Protein (g)</th><th>Carbs (g)</th><th>Fibre (g)</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td>Avocado</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent3)">15</td><td>2</td><td>9</td><td>6.7</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Almonds</td><td class="amount">30g</td><td class="highlight-cell" style="color:var(--accent3)">14</td><td>6</td><td>6</td><td>3.5</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Walnuts</td><td class="amount">30g (~7 halves)</td><td class="highlight-cell" style="color:var(--accent3)">18.5</td><td>4.3</td><td>3.9</td><td>1.9</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Peanut Butter (natural)</td><td class="amount">2 tbsp (~32g)</td><td class="highlight-cell" style="color:var(--accent3)">16</td><td>8</td><td>6</td><td>1.9</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Chia Seeds</td><td class="amount">30g</td><td class="highlight-cell" style="color:var(--accent3)">8.7</td><td>5.3</td><td>12</td><td>10.6</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Flaxseeds (ground)</td><td class="amount">30g</td><td class="highlight-cell" style="color:var(--accent3)">11</td><td>5.7</td><td>8</td><td>8</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Olive Oil (extra virgin)</td><td class="amount">1 tbsp (~14ml)</td><td class="highlight-cell" style="color:var(--accent3)">14</td><td>0</td><td>0</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Eggs (whole)</td><td class="amount">2 large (~100g)</td><td class="highlight-cell" style="color:var(--accent3)">10</td><td>13</td><td>1</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
+          <tr><td>Salmon (cooked)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent3)">13</td><td>25</td><td>0</td><td>0</td><td><span class="badge badge-nveg">Non-Veg</span></td></tr>
+          <tr><td>Paneer (Cottage Cheese)</td><td class="amount">100g</td><td class="highlight-cell" style="color:var(--accent3)">20</td><td>18</td><td>1.2</td><td>0</td><td><span class="badge badge-veg">Veg</span></td></tr>
+          <tr><td>Coconut (fresh / scraped)</td><td class="amount">30g</td><td class="highlight-cell" style="color:var(--accent3)">10</td><td>1.1</td><td>4.3</td><td>2.7</td><td><span class="badge badge-veg">Veg</span></td></tr>
+        </tbody></table>
       </div>
     </div>
 
@@ -670,12 +453,114 @@
 
 <script>
   let selectedGoal = 'maintain';
+  let unitSystem = 'metric'; // default
 
-  function showPage(id) {
+  /* ── Unit system toggle ── */
+  function setUnitSystem(sys) {
+    unitSystem = sys;
+    document.getElementById('sys-metric').classList.toggle('active', sys === 'metric');
+    document.getElementById('sys-imperial').classList.toggle('active', sys === 'imperial');
+
+    const isImp = sys === 'imperial';
+
+    // Height
+    document.getElementById('height-row-metric').style.display = isImp ? 'none' : 'flex';
+    document.getElementById('height-row-imperial').style.display = isImp ? 'flex' : 'none';
+    // Current weight
+    document.getElementById('cw-row-metric').style.display = isImp ? 'none' : 'flex';
+    document.getElementById('cw-row-imperial').style.display = isImp ? 'flex' : 'none';
+    // Goal weight
+    document.getElementById('gw-row-metric').style.display = isImp ? 'none' : 'flex';
+    document.getElementById('gw-row-imperial').style.display = isImp ? 'flex' : 'none';
+
+    // If switching, carry values across
+    if (isImp) {
+      const hcm = parseFloat(document.getElementById('height-cm').value);
+      if (hcm) {
+        const totalIn = hcm / 2.54;
+        document.getElementById('height-ft').value = Math.floor(totalIn / 12);
+        document.getElementById('height-in').value = Math.round(totalIn % 12);
+      }
+      const cwkg = parseFloat(document.getElementById('cw-kg').value);
+      if (cwkg) document.getElementById('cw-lb').value = Math.round(cwkg * 2.2046);
+      const gwkg = parseFloat(document.getElementById('gw-kg').value);
+      if (gwkg) document.getElementById('gw-lb').value = Math.round(gwkg * 2.2046);
+    } else {
+      const ft = parseFloat(document.getElementById('height-ft').value) || 0;
+      const inc = parseFloat(document.getElementById('height-in').value) || 0;
+      if (ft) document.getElementById('height-cm').value = Math.round((ft * 12 + inc) * 2.54);
+      const cwlb = parseFloat(document.getElementById('cw-lb').value);
+      if (cwlb) document.getElementById('cw-kg').value = (cwlb / 2.2046).toFixed(1);
+      const gwlb = parseFloat(document.getElementById('gw-lb').value);
+      if (gwlb) document.getElementById('gw-kg').value = (gwlb / 2.2046).toFixed(1);
+    }
+
+    liveConvert('height'); liveConvert('cw'); liveConvert('gw');
+  }
+
+  /* ── Live conversion hints ── */
+  function liveConvert(field) {
+    if (field === 'height') {
+      const hint = document.getElementById('hint-height');
+      if (unitSystem === 'metric') {
+        const cm = parseFloat(document.getElementById('height-cm').value);
+        if (!cm) { hint.textContent = ''; return; }
+        const totalIn = cm / 2.54;
+        hint.textContent = `≈ ${Math.floor(totalIn/12)}ft ${Math.round(totalIn%12)}in`;
+      } else {
+        const ft = parseFloat(document.getElementById('height-ft').value) || 0;
+        const inc = parseFloat(document.getElementById('height-in').value) || 0;
+        if (!ft && !inc) { hint.textContent = ''; return; }
+        hint.textContent = `≈ ${Math.round((ft*12+inc)*2.54)} cm`;
+      }
+    } else if (field === 'cw') {
+      const hint = document.getElementById('hint-cw');
+      if (unitSystem === 'metric') {
+        const kg = parseFloat(document.getElementById('cw-kg').value);
+        if (!kg) { hint.textContent = ''; return; }
+        hint.textContent = `≈ ${(kg*2.2046).toFixed(1)} lbs`;
+      } else {
+        const lb = parseFloat(document.getElementById('cw-lb').value);
+        if (!lb) { hint.textContent = ''; return; }
+        hint.textContent = `≈ ${(lb/2.2046).toFixed(1)} kg`;
+      }
+    } else if (field === 'gw') {
+      const hint = document.getElementById('hint-gw');
+      if (unitSystem === 'metric') {
+        const kg = parseFloat(document.getElementById('gw-kg').value);
+        if (!kg) { hint.textContent = ''; return; }
+        hint.textContent = `≈ ${(kg*2.2046).toFixed(1)} lbs`;
+      } else {
+        const lb = parseFloat(document.getElementById('gw-lb').value);
+        if (!lb) { hint.textContent = ''; return; }
+        hint.textContent = `≈ ${(lb/2.2046).toFixed(1)} kg`;
+      }
+    }
+  }
+
+  /* ── Get values always in metric for calculation ── */
+  function getMetricValues() {
+    let heightCm, curKg, goalKg;
+    if (unitSystem === 'metric') {
+      heightCm = parseFloat(document.getElementById('height-cm').value);
+      curKg    = parseFloat(document.getElementById('cw-kg').value);
+      goalKg   = parseFloat(document.getElementById('gw-kg').value);
+    } else {
+      const ft  = parseFloat(document.getElementById('height-ft').value) || 0;
+      const inc = parseFloat(document.getElementById('height-in').value) || 0;
+      heightCm = (ft * 12 + inc) * 2.54;
+      curKg    = parseFloat(document.getElementById('cw-lb').value) / 2.2046;
+      goalKg   = parseFloat(document.getElementById('gw-lb').value) / 2.2046;
+    }
+    return { heightCm, curKg, goalKg };
+  }
+
+  /* ── Page navigation ── */
+  function showPage(id, e) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
-    event.target.classList.add('active');
+    if (e) e.target.classList.add('active');
   }
 
   function selectGoal(btn, goal) {
@@ -684,114 +569,88 @@
     selectedGoal = goal;
   }
 
+  /* ── Main calculation ── */
   function calculate() {
-    const height = parseFloat(document.getElementById('height').value);
-    const curWeight = parseFloat(document.getElementById('current-weight').value);
-    const goalWeight = parseFloat(document.getElementById('goal-weight').value);
-    const age = parseFloat(document.getElementById('age').value);
-    const sex = document.getElementById('sex').value;
+    const { heightCm, curKg, goalKg } = getMetricValues();
+    const age      = parseFloat(document.getElementById('age').value);
+    const sex      = document.getElementById('sex').value;
     const activity = parseFloat(document.getElementById('activity').value);
 
-    if (!height || !curWeight || !goalWeight || !age) {
-      alert('Please fill in all fields.');
-      return;
+    if (!heightCm || !curKg || !goalKg || !age) {
+      alert('Please fill in all fields.'); return;
     }
 
     // BMI
-    const heightM = height / 100;
-    const bmi = curWeight / (heightM * heightM);
-    const healthyMin = (18.5 * heightM * heightM).toFixed(1);
-    const healthyMax = (24.9 * heightM * heightM).toFixed(1);
+    const hm = heightCm / 100;
+    const bmi = curKg / (hm * hm);
+    const hMin = (18.5 * hm * hm).toFixed(1);
+    const hMax = (24.9 * hm * hm).toFixed(1);
+
+    // Display healthy range in user's chosen unit
+    let rangeStr, heightStr;
+    if (unitSystem === 'imperial') {
+      const hMinLb = (parseFloat(hMin) * 2.2046).toFixed(0);
+      const hMaxLb = (parseFloat(hMax) * 2.2046).toFixed(0);
+      rangeStr = `${hMinLb}–${hMaxLb} lbs`;
+      const ft = parseFloat(document.getElementById('height-ft').value)||0;
+      const inc = parseFloat(document.getElementById('height-in').value)||0;
+      heightStr = `${ft}ft ${inc}in`;
+    } else {
+      rangeStr = `${hMin}–${hMax} kg`;
+      heightStr = `${heightCm} cm`;
+    }
 
     const banner = document.getElementById('bmi-banner');
-    banner.classList.remove('show', 'healthy', 'underweight', 'overweight', 'obese');
+    banner.classList.remove('show','healthy','underweight','overweight','obese');
+    let bc, bm;
+    if      (bmi < 18.5) { bc='underweight'; bm=`<strong>BMI: ${bmi.toFixed(1)} — Underweight</strong>Your healthy weight range for ${heightStr} is ${rangeStr}. A calorie surplus and strength training can help.`; }
+    else if (bmi < 25)   { bc='healthy';     bm=`<strong>BMI: ${bmi.toFixed(1)} — Healthy Weight ✓</strong>You're within the healthy range (${rangeStr}) for your height. Great starting point!`; }
+    else if (bmi < 30)   { bc='overweight';  bm=`<strong>BMI: ${bmi.toFixed(1)} — Overweight</strong>Healthy range for ${heightStr} is ${rangeStr}. A moderate calorie deficit with exercise is sustainable.`; }
+    else                 { bc='obese';        bm=`<strong>BMI: ${bmi.toFixed(1)} — Obese</strong>Healthy range for ${heightStr} is ${rangeStr}. Consult a doctor or dietitian alongside dietary changes.`; }
+    banner.innerHTML = bm;
+    banner.classList.add('show', bc);
 
-    let bmiClass, bmiMsg;
-    if (bmi < 18.5) {
-      bmiClass = 'underweight';
-      bmiMsg = `<strong>BMI: ${bmi.toFixed(1)} — Underweight</strong>Your healthy weight range for your height (${height} cm) is ${healthyMin}–${healthyMax} kg. Consider a calorie surplus and strength training to reach a healthier weight.`;
-    } else if (bmi < 25) {
-      bmiClass = 'healthy';
-      bmiMsg = `<strong>BMI: ${bmi.toFixed(1)} — Healthy Weight ✓</strong>Your current weight is within the healthy range (${healthyMin}–${healthyMax} kg) for your height. Great starting point!`;
-    } else if (bmi < 30) {
-      bmiClass = 'overweight';
-      bmiMsg = `<strong>BMI: ${bmi.toFixed(1)} — Overweight</strong>Your healthy weight range for ${height} cm is ${healthyMin}–${healthyMax} kg. A moderate calorie deficit with exercise is a sustainable approach.`;
-    } else {
-      bmiClass = 'obese';
-      bmiMsg = `<strong>BMI: ${bmi.toFixed(1)} — Obese</strong>Your healthy weight range for ${height} cm is ${healthyMin}–${healthyMax} kg. Consulting a doctor or nutritionist alongside diet changes is recommended.`;
-    }
-    banner.innerHTML = bmiMsg;
-    banner.classList.add('show', bmiClass);
-
-    // BMR (Mifflin-St Jeor)
-    let bmr;
-    if (sex === 'male') {
-      bmr = 10 * curWeight + 6.25 * height - 5 * age + 5;
-    } else {
-      bmr = 10 * curWeight + 6.25 * height - 5 * age - 161;
-    }
+    // BMR Mifflin-St Jeor (always uses kg & cm)
+    let bmr = sex === 'male'
+      ? 10*curKg + 6.25*heightCm - 5*age + 5
+      : 10*curKg + 6.25*heightCm - 5*age - 161;
     let tdee = bmr * activity;
 
-    // Calorie adjustment based on goal
-    let calories;
-    let proteinMultiplier, carbPercent, fatPercent;
-
-    if (selectedGoal === 'lose') {
-      calories = tdee - 400;
-      proteinMultiplier = 2.2; // per goal kg
-      carbPercent = 0.35; fatPercent = 0.25;
-    } else if (selectedGoal === 'gain') {
-      calories = tdee + 300;
-      proteinMultiplier = 2.0;
-      carbPercent = 0.45; fatPercent = 0.25;
-    } else if (selectedGoal === 'recomp') {
-      calories = tdee;
-      proteinMultiplier = 2.4;
-      carbPercent = 0.35; fatPercent = 0.28;
-    } else {
-      calories = tdee;
-      proteinMultiplier = 1.8;
-      carbPercent = 0.45; fatPercent = 0.30;
-    }
+    let calories, proteinMult, carbPct, fatPct;
+    if (selectedGoal==='lose')     { calories=tdee-400; proteinMult=2.2; carbPct=0.35; fatPct=0.25; }
+    else if (selectedGoal==='gain'){ calories=tdee+300; proteinMult=2.0; carbPct=0.45; fatPct=0.25; }
+    else if (selectedGoal==='recomp'){ calories=tdee;  proteinMult=2.4; carbPct=0.35; fatPct=0.28; }
+    else                           { calories=tdee;    proteinMult=1.8; carbPct=0.45; fatPct=0.30; }
 
     calories = Math.round(calories);
+    const protein = Math.round(goalKg * proteinMult);
+    const fat     = Math.round((fatPct * calories) / 9);
+    const carbs   = Math.max(Math.round((calories - protein*4 - fat*9) / 4), 50);
+    const fibre   = sex === 'male' ? 35 : 28;
 
-    // Protein based on goal weight (lean mass proxy)
-    const protein = Math.round(goalWeight * proteinMultiplier);
-    const proteinCals = protein * 4;
+    // Display goal weight in user's unit
+    const goalDisplay = unitSystem === 'imperial'
+      ? `${Math.round(goalKg * 2.2046)} lbs`
+      : `${goalKg.toFixed(1)} kg`;
 
-    const remainingCals = calories - proteinCals;
-    const fat = Math.round((fatPercent * calories) / 9);
-    const carbs = Math.round((remainingCals - fat * 9) / 4);
-
-    // Fibre: WHO recommends 25–38g
-    const fibre = sex === 'male' ? 35 : 28;
-
-    document.getElementById('res-cal').textContent = calories.toLocaleString();
+    document.getElementById('res-cal').textContent    = calories.toLocaleString();
     document.getElementById('res-protein').textContent = protein;
-    document.getElementById('res-carbs').textContent = Math.max(carbs, 50);
-    document.getElementById('res-fat').textContent = fat;
-    document.getElementById('res-fibre').textContent = fibre;
+    document.getElementById('res-carbs').textContent   = carbs;
+    document.getElementById('res-fat').textContent     = fat;
+    document.getElementById('res-fibre').textContent   = fibre;
 
-    const goalLabels = {
-      lose: 'fat loss (400 kcal deficit)',
-      gain: 'muscle building (300 kcal surplus)',
-      maintain: 'maintenance',
-      recomp: 'body recomposition (maintenance calories, high protein)'
-    };
-
+    const goalLabels = { lose:'fat loss (400 kcal deficit)', gain:'muscle building (300 kcal surplus)', maintain:'maintenance', recomp:'body recomposition (maintenance calories, high protein)' };
     document.getElementById('res-note').innerHTML = `
       <strong>How these numbers were calculated:</strong><br>
-      Your BMR (Mifflin-St Jeor) is ${Math.round(bmr)} kcal. With your activity level, your TDEE is ${Math.round(tdee)} kcal. 
-      Calories are set for <em>${goalLabels[selectedGoal]}</em>. 
-      Protein is set at ${proteinMultiplier}g per kg of goal body weight (${goalWeight} kg). 
-      Fibre target follows WHO guidelines. 
-      These are estimates — adjust based on real-world results and how you feel.
+      BMR (Mifflin-St Jeor): ${Math.round(bmr)} kcal. TDEE with your activity level: ${Math.round(tdee)} kcal.
+      Calories adjusted for <em>${goalLabels[selectedGoal]}</em>.
+      Protein set at ${proteinMult}g per kg of goal body weight (${goalDisplay}).
+      Fibre follows WHO guidelines. These are estimates — adjust based on real-world results.
     `;
 
-    const resultsCard = document.getElementById('results-card');
-    resultsCard.classList.add('show');
-    resultsCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const rc = document.getElementById('results-card');
+    rc.classList.add('show');
+    rc.scrollIntoView({ behavior:'smooth', block:'nearest' });
   }
 </script>
 </body>
