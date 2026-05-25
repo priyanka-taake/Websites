@@ -299,6 +299,16 @@
     display: none; margin-top: 14px;
     color: var(--accent); font-size: 0.88rem; font-weight: 600;
   }
+
+  .notify-error,
+  .notify-field-error {
+    display: block;
+    margin-top: 10px;
+    color: var(--accent4);
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
   .notify-count {
     margin-top: 14px; font-size: 0.8rem; color: var(--muted);
   }
@@ -810,32 +820,41 @@
         <h1>The Recipe<br><em>Kitchen</em></h1>
         <p>Macro-fitted meal plans and recipes built around your exact calorie and protein targets. Eat well, hit your numbers, every day.</p>
 
-        <!-- Netlify Form — submissions appear in your Netlify dashboard -->
-        <form
-          name="recipe-waitlist"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          onsubmit="handleNotify(event)"
-          style="display:contents"
-        >
-          <!-- Hidden fields required by Netlify -->
-          <input type="hidden" name="form-name" value="recipe-waitlist">
-          <p style="display:none"><input name="bot-field"></p>
+        <div data-fs-success id="notify-success">🎉 You're on the list! We'll reach out when it launches.</div>
+        <div data-fs-error id="notify-error" class="notify-error"></div>
 
+        <form id="waitlist-form">
           <div class="notify-form">
             <input
               type="email"
               id="notify-email"
               name="email"
               placeholder="your@email.com"
+              data-fs-field
               required
+              autocomplete="email"
             >
-            <button type="submit" class="notify-btn">Notify Me</button>
+
+            <button
+              type="submit"
+              class="notify-btn"
+              data-fs-submit-btn
+            >
+              Notify Me
+            </button>
           </div>
+
+          <span
+            data-fs-error="email"
+            class="notify-field-error"
+          ></span>
+
+          <input type="hidden" name="source" value="NutriCalc Waitlist">
+          <input type="hidden" name="feature" value="Recipe Kitchen">
+          <input type="hidden" name="_subject" value="New NutriCalc Waitlist Signup">
+          <input type="text" name="_gotcha" style="display:none">
         </form>
 
-        <div class="notify-success" id="notify-success">🎉 You're on the list! We'll reach out when it launches.</div>
         <div class="notify-count">Be among the first to know when we launch.</div>
       </div>
 
@@ -1213,21 +1232,8 @@
     renderTracker();
   }
 
-  /* ── Waitlist notify ── */
-  function handleNotify(e) {
-    e.preventDefault();
-    const email = document.getElementById('notify-email').value.trim();
-    if (!email || !email.includes('@')) return;
-
-    // Submit to Netlify via fetch (keeps user on the same page)
-    const form = e.target;
-    const data = new FormData(form);
-    fetch('/', { method: 'POST', body: data })
-      .catch(() => {}); // silent fail — still show success
-
-    form.style.display = 'none';
-    document.getElementById('notify-success').style.display = 'block';
-  }
+  /* ── Formspree waitlist (init after DOM ready) ── */
+  // Formspree Ajax SDK is loaded via CDN at bottom of file
 
   /* ── Sidebar / mobile toggle ── */
   function toggleSidebar() {
@@ -1414,6 +1420,13 @@
     // Auto-populate tracker goals
     setTrackerGoals(calories, protein, Math.max(carbs,50), fat, fibre);
   }
+
+  // Formspree Vanilla JS Ajax
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  document.addEventListener('DOMContentLoaded', function() {
+    formspree('initForm', { formElement: '#waitlist-form', formId: 'mwvznjno' });
+  });
 </script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
