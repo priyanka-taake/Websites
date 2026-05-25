@@ -809,12 +809,34 @@
         <div class="teaser-badge">🔒 Coming Soon</div>
         <h1>The Recipe<br><em>Kitchen</em></h1>
         <p>Macro-fitted meal plans and recipes built around your exact calorie and protein targets. Eat well, hit your numbers, every day.</p>
-        <div class="notify-form">
-          <input type="email" id="notify-email" placeholder="your@email.com">
-          <button class="notify-btn" onclick="handleNotify()">Notify Me</button>
-        </div>
+
+        <!-- Netlify Form — submissions appear in your Netlify dashboard -->
+        <form
+          name="recipe-waitlist"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onsubmit="handleNotify(event)"
+          style="display:contents"
+        >
+          <!-- Hidden fields required by Netlify -->
+          <input type="hidden" name="form-name" value="recipe-waitlist">
+          <p style="display:none"><input name="bot-field"></p>
+
+          <div class="notify-form">
+            <input
+              type="email"
+              id="notify-email"
+              name="email"
+              placeholder="your@email.com"
+              required
+            >
+            <button type="submit" class="notify-btn">Notify Me</button>
+          </div>
+        </form>
+
         <div class="notify-success" id="notify-success">🎉 You're on the list! We'll reach out when it launches.</div>
-        <div class="notify-count">Join <span id="waitlist-count">47</span> others on the waitlist</div>
+        <div class="notify-count">Be among the first to know when we launch.</div>
       </div>
 
       <!-- Features -->
@@ -896,7 +918,7 @@
           <li>Indian ingredients & flavours</li>
           <li>New recipes added every week</li>
         </ul>
-        <button class="pricing-cta" onclick="document.getElementById('notify-email').focus(); document.getElementById('notify-email').scrollIntoView({behavior:'smooth'})">
+        <button class="pricing-cta" onclick="showPage('recipes'); setTimeout(()=>{ document.getElementById('notify-email').focus(); document.getElementById('notify-email').scrollIntoView({behavior:'smooth'}); }, 100)">
           Join the Waitlist for Early Access
         </button>
       </div>
@@ -1192,18 +1214,19 @@
   }
 
   /* ── Waitlist notify ── */
-  function handleNotify() {
+  function handleNotify(e) {
+    e.preventDefault();
     const email = document.getElementById('notify-email').value.trim();
-    if (!email || !email.includes('@')) {
-      document.getElementById('notify-email').style.borderColor = 'var(--accent4)';
-      setTimeout(() => document.getElementById('notify-email').style.borderColor = '', 1500);
-      return;
-    }
-    document.querySelector('.notify-form').style.display = 'none';
+    if (!email || !email.includes('@')) return;
+
+    // Submit to Netlify via fetch (keeps user on the same page)
+    const form = e.target;
+    const data = new FormData(form);
+    fetch('/', { method: 'POST', body: data })
+      .catch(() => {}); // silent fail — still show success
+
+    form.style.display = 'none';
     document.getElementById('notify-success').style.display = 'block';
-    // Increment count visually
-    const el = document.getElementById('waitlist-count');
-    el.textContent = parseInt(el.textContent) + 1;
   }
 
   /* ── Sidebar / mobile toggle ── */
