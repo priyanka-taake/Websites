@@ -240,7 +240,252 @@
     .card { padding: 22px 18px; }
   }
 
-  ::-webkit-scrollbar { width: 6px; }
+  .ni-coming-badge {
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em;
+    background: rgba(245,194,106,0.15); color: var(--accent3);
+    border: 1px solid rgba(245,194,106,0.3);
+    padding: 2px 7px; border-radius: 20px; flex-shrink: 0;
+    text-transform: uppercase;
+  }
+
+  /* ── RECIPE TEASER PAGE ── */
+  .teaser-page { padding: 48px 24px 80px; max-width: 860px; margin: 0 auto; }
+
+  .teaser-hero {
+    text-align: center; padding: 48px 24px 56px; position: relative;
+    border-radius: 24px; overflow: hidden; margin-bottom: 48px;
+    background: linear-gradient(135deg, #1a1f2e 0%, #0f1117 100%);
+    border: 1px solid var(--border);
+  }
+  .teaser-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 60% 0%, rgba(245,194,106,0.14) 0%, transparent 65%),
+                radial-gradient(ellipse at 20% 100%, rgba(200,245,106,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .teaser-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(245,194,106,0.12); border: 1px solid rgba(245,194,106,0.3);
+    color: var(--accent3); font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px; margin-bottom: 24px;
+  }
+  .teaser-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900;
+    line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px;
+  }
+  .teaser-hero h1 em { color: var(--accent3); font-style: normal; }
+  .teaser-hero p { color: var(--muted); font-size: 1rem; max-width: 440px; margin: 0 auto 32px; line-height: 1.65; }
+
+  .notify-form { display: flex; gap: 10px; max-width: 400px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+  .notify-form input[type=email] {
+    flex: 1; min-width: 200px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+    padding: 12px 16px; outline: none; transition: border-color 0.2s;
+  }
+  .notify-form input[type=email]:focus { border-color: var(--accent3); }
+  .notify-form input[type=email]::placeholder { color: var(--muted); }
+  .notify-btn {
+    padding: 12px 22px; background: var(--accent3); border: none;
+    border-radius: 10px; color: #1a1000; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .notify-btn:hover { background: #f7ce7e; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245,194,106,0.3); }
+  .notify-success {
+    display: none; margin-top: 14px;
+    color: var(--accent); font-size: 0.88rem; font-weight: 600;
+  }
+  .notify-count {
+    margin-top: 14px; font-size: 0.8rem; color: var(--muted);
+  }
+  .notify-count span { color: var(--accent3); font-weight: 600; }
+
+  /* Feature preview cards */
+  .teaser-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .feat-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px 20px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .feat-card:hover { border-color: rgba(245,194,106,0.3); transform: translateY(-2px); }
+  .feat-icon { font-size: 1.8rem; margin-bottom: 12px; }
+  .feat-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+  .feat-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+
+  /* Sample recipe teaser */
+  .sample-section-title {
+    font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700;
+    margin-bottom: 20px; text-align: center;
+  }
+  .sample-section-title span { color: var(--accent3); }
+  .recipe-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .recipe-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; position: relative;
+  }
+  .recipe-card-img {
+    height: 130px; display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+  }
+  .recipe-card-body { padding: 16px; }
+  .recipe-card-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; }
+  .recipe-macros { display: flex; gap: 8px; flex-wrap: wrap; }
+  .rmacro {
+    font-size: 0.72rem; font-weight: 600; padding: 3px 9px;
+    border-radius: 20px; background: var(--surface2);
+  }
+  .recipe-lock {
+    position: absolute; top: 10px; right: 10px;
+    background: rgba(15,17,23,0.85); border: 1px solid var(--border);
+    border-radius: 8px; padding: 4px 9px;
+    font-size: 0.7rem; font-weight: 600; color: var(--accent3);
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  .pricing-card {
+    background: linear-gradient(135deg, rgba(245,194,106,0.08), rgba(200,245,106,0.04));
+    border: 1px solid rgba(245,194,106,0.25);
+    border-radius: 20px; padding: 36px 32px; text-align: center; max-width: 420px; margin: 0 auto;
+  }
+  .pricing-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+  .pricing-card .price { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--accent3); line-height: 1; margin: 16px 0 4px; }
+  .pricing-card .price-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 24px; }
+  .pricing-features { list-style: none; text-align: left; margin-bottom: 28px; }
+  .pricing-features li { padding: 7px 0; font-size: 0.9rem; color: var(--muted); display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(44,51,80,0.5); }
+  .pricing-features li:last-child { border-bottom: none; }
+  .pricing-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .pricing-cta {
+    width: 100%; padding: 14px; background: var(--accent3); border: none;
+    border-radius: 10px; color: #1a1000; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+  }
+  .pricing-cta:hover { background: #f7ce7e; transform: translateY(-1px); }
+
+  /* ── MACRO TRACKER ── */
+  .tracker-page { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .tracker-goals-bar {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+    gap: 12px; margin-bottom: 28px;
+  }
+  .tgoal-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px 14px; text-align: center;
+  }
+  .tgoal-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 6px; }
+  .tgoal-numbers { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+  .tgoal-numbers strong { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; }
+  .tgoal-numbers span { font-size: 0.75rem; }
+
+  .prog-bar-wrap { background: var(--surface2); border-radius: 99px; height: 7px; overflow: hidden; }
+  .prog-bar { height: 100%; border-radius: 99px; transition: width 0.5s cubic-bezier(.4,0,.2,1); min-width: 0; }
+  .prog-over { background: var(--accent4) !important; }
+
+  .prog-remaining { font-size: 0.72rem; color: var(--muted); margin-top: 5px; }
+  .prog-remaining.over { color: var(--accent4); }
+
+  /* Add meal section */
+  .tracker-add-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px; margin-bottom: 24px;
+  }
+  .tracker-add-title {
+    font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700;
+    margin-bottom: 18px; display: flex; align-items: center; gap: 8px;
+  }
+  .meal-type-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .meal-type-btn {
+    padding: 7px 14px; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--muted); font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.18s;
+  }
+  .meal-type-btn:hover { border-color: var(--accent2); color: var(--text); }
+  .meal-type-btn.active { background: rgba(126,200,227,0.1); border-color: var(--accent2); color: var(--accent2); }
+
+  .meal-inputs { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 10px; align-items: end; }
+  @media (max-width: 960px) { .meal-inputs { grid-template-columns: 1fr 1fr; } }
+  .meal-inputs .field { margin-bottom: 0; }
+  .meal-inputs label { font-size: 0.72rem; }
+  .meal-inputs input { padding: 10px 12px; font-size: 0.9rem; }
+  .add-meal-btn {
+    padding: 10px 20px; background: var(--accent2); border: none;
+    border-radius: 10px; color: #0a1a20; font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+    white-space: nowrap; align-self: end; height: 42px;
+  }
+  .add-meal-btn:hover { background: #9dd5e8; transform: translateY(-1px); }
+
+  /* Quick-add common foods */
+  .quick-add-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 16px 0 8px; }
+  .quick-foods { display: flex; gap: 8px; flex-wrap: wrap; }
+  .quick-food-btn {
+    padding: 6px 12px; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--muted); font-size: 0.78rem; font-weight: 500;
+    cursor: pointer; transition: all 0.18s; font-family: 'DM Sans', sans-serif;
+  }
+  .quick-food-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,245,106,0.06); }
+
+  /* Meal log */
+  .meal-log-section { margin-bottom: 24px; }
+  .meal-group { margin-bottom: 20px; }
+  .meal-group-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px; background: var(--surface2);
+    border-radius: 10px 10px 0 0; border: 1px solid var(--border); border-bottom: none;
+  }
+  .meal-group-name { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .meal-group-total { font-size: 0.8rem; color: var(--muted); }
+  .meal-log-table {
+    width: 100%; border-collapse: collapse;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 0 0 10px 10px; overflow: hidden; font-size: 0.88rem;
+  }
+  .meal-log-table th {
+    padding: 9px 14px; text-align: left; font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+    border-bottom: 1px solid var(--border); background: var(--surface);
+  }
+  .meal-log-table td { padding: 11px 14px; border-bottom: 1px solid rgba(44,51,80,0.4); vertical-align: middle; }
+  .meal-log-table tr:last-child td { border-bottom: none; }
+  .meal-log-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+  .del-btn {
+    background: none; border: none; color: var(--muted); cursor: pointer;
+    padding: 4px 8px; border-radius: 6px; font-size: 0.85rem; transition: all 0.15s;
+  }
+  .del-btn:hover { background: rgba(245,106,106,0.12); color: var(--accent4); }
+
+  .empty-log {
+    text-align: center; padding: 48px 24px;
+    background: var(--surface); border: 1px dashed var(--border);
+    border-radius: 14px; color: var(--muted); font-size: 0.9rem; line-height: 1.6;
+  }
+  .empty-log .empty-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+  .tracker-summary-card {
+    background: linear-gradient(135deg, rgba(126,200,227,0.08), rgba(200,245,106,0.04));
+    border: 1px solid rgba(126,200,227,0.2); border-radius: 16px; padding: 20px 24px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+  .summary-left h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+  .summary-left p { font-size: 0.82rem; color: var(--muted); }
+  .reset-btn {
+    padding: 10px 20px; background: transparent; border: 1px solid var(--border);
+    border-radius: 10px; color: var(--muted); font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  .reset-btn:hover { border-color: var(--accent4); color: var(--accent4); }
+
+  .set-goals-tip {
+    background: rgba(200,245,106,0.07); border: 1px solid rgba(200,245,106,0.2);
+    border-radius: 12px; padding: 14px 18px; font-size: 0.85rem; color: var(--muted);
+    margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+  }
+  .set-goals-tip a { color: var(--accent); cursor: pointer; font-weight: 600; text-decoration: none; }
+  .set-goals-tip a:hover { text-decoration: underline; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
@@ -278,6 +523,15 @@
       <span class="ni-dot"></span>
     </div>
 
+    <div class="nav-item" id="nav-tracker" onclick="showPage('tracker')">
+      <span class="ni-icon">📝</span>
+      <span class="ni-label">
+        Macro Tracker
+        <small>Log meals &amp; track progress</small>
+      </span>
+      <span class="ni-dot"></span>
+    </div>
+
     <div class="nav-item" id="nav-atlas" onclick="showPage('atlas')">
       <span class="ni-icon">📊</span>
       <span class="ni-label">
@@ -285,6 +539,15 @@
         <small>Nutrient content by food</small>
       </span>
       <span class="ni-dot"></span>
+    </div>
+
+    <div class="nav-item" id="nav-recipes" onclick="showPage('recipes')">
+      <span class="ni-icon">👨‍🍳</span>
+      <span class="ni-label">
+        Recipe Kitchen
+        <small>Macro-fitted meal plans</small>
+      </span>
+      <span class="ni-coming-badge">Soon</span>
     </div>
   </div>
 
@@ -537,11 +800,411 @@
     </div>
   </div>
 
+  <!-- PAGE: Recipe Kitchen (Coming Soon) -->
+  <div class="page" id="page-recipes">
+    <div class="teaser-page">
+
+      <!-- Hero -->
+      <div class="teaser-hero">
+        <div class="teaser-badge">🔒 Coming Soon</div>
+        <h1>The Recipe<br><em>Kitchen</em></h1>
+        <p>Macro-fitted meal plans and recipes built around your exact calorie and protein targets. Eat well, hit your numbers, every day.</p>
+        <div class="notify-form">
+          <input type="email" id="notify-email" placeholder="your@email.com">
+          <button class="notify-btn" onclick="handleNotify()">Notify Me</button>
+        </div>
+        <div class="notify-success" id="notify-success">🎉 You're on the list! We'll reach out when it launches.</div>
+        <div class="notify-count">Join <span id="waitlist-count">47</span> others on the waitlist</div>
+      </div>
+
+      <!-- Features -->
+      <div class="teaser-features">
+        <div class="feat-card">
+          <div class="feat-icon">🎯</div>
+          <div class="feat-title">Built Around Your Targets</div>
+          <div class="feat-desc">Every recipe auto-adjusted to match your exact macro goals from the calculator.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🥗</div>
+          <div class="feat-title">Weekly Meal Plans</div>
+          <div class="feat-desc">Full 7-day plans with breakfast, lunch, dinner and snacks — balanced to your calories.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🌱</div>
+          <div class="feat-title">Veg & Non-Veg Options</div>
+          <div class="feat-desc">Separate recipe sets for vegetarian, vegan, and standard diets. Indian ingredients included.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🛒</div>
+          <div class="feat-title">Smart Grocery Lists</div>
+          <div class="feat-desc">Auto-generated shopping lists for the week. Save time, reduce food waste.</div>
+        </div>
+      </div>
+
+      <!-- Sample blurred recipes -->
+      <div class="sample-section-title">A <span>taste</span> of what's coming</div>
+      <div class="recipe-cards">
+        <div class="recipe-card">
+          <div class="recipe-card-img" style="background:linear-gradient(135deg,#1e2a1a,#0f1117)">🥣</div>
+          <div class="recipe-lock">🔒 Premium</div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-name">High-Protein Oats Bowl</div>
+            <div class="recipe-macros">
+              <span class="rmacro" style="color:var(--accent)">38g protein</span>
+              <span class="rmacro" style="color:var(--accent2)">52g carbs</span>
+              <span class="rmacro" style="color:var(--accent3)">12g fat</span>
+            </div>
+          </div>
+        </div>
+        <div class="recipe-card">
+          <div class="recipe-card-img" style="background:linear-gradient(135deg,#1a1e2a,#0f1117)">🍛</div>
+          <div class="recipe-lock">🔒 Premium</div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-name">Masala Chicken & Rice</div>
+            <div class="recipe-macros">
+              <span class="rmacro" style="color:var(--accent)">45g protein</span>
+              <span class="rmacro" style="color:var(--accent2)">60g carbs</span>
+              <span class="rmacro" style="color:var(--accent3)">8g fat</span>
+            </div>
+          </div>
+        </div>
+        <div class="recipe-card">
+          <div class="recipe-card-img" style="background:linear-gradient(135deg,#1a1a2a,#0f1117)">🥙</div>
+          <div class="recipe-lock">🔒 Premium</div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-name">Paneer Tikka Wrap</div>
+            <div class="recipe-macros">
+              <span class="rmacro" style="color:var(--accent)">30g protein</span>
+              <span class="rmacro" style="color:var(--accent2)">38g carbs</span>
+              <span class="rmacro" style="color:var(--accent3)">14g fat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing preview -->
+      <div class="pricing-card">
+        <div class="teaser-badge" style="margin-bottom:16px">Early Bird Pricing</div>
+        <h3>Premium Kitchen</h3>
+        <div class="price">₹199</div>
+        <div class="price-sub">per month · cancel anytime</div>
+        <ul class="pricing-features">
+          <li>100+ macro-fitted recipes</li>
+          <li>Weekly personalised meal plans</li>
+          <li>Auto grocery list generator</li>
+          <li>Veg, non-veg & vegan options</li>
+          <li>Indian ingredients & flavours</li>
+          <li>New recipes added every week</li>
+        </ul>
+        <button class="pricing-cta" onclick="document.getElementById('notify-email').focus(); document.getElementById('notify-email').scrollIntoView({behavior:'smooth'})">
+          Join the Waitlist for Early Access
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PAGE: Macro Tracker -->
+  <div class="page" id="page-tracker">
+    <div class="hero">
+      <h1>Macro<br><em>Tracker</em></h1>
+      <p>Log your meals and see how your day stacks up against your targets.</p>
+    </div>
+
+    <div class="tracker-page">
+
+      <!-- Tip if no goals set -->
+      <div class="set-goals-tip" id="goals-tip" style="display:none">
+        💡 Set your targets first — <a onclick="showPage('calculator')">run the calculator</a> and your goals will auto-populate here.
+      </div>
+
+      <!-- Progress bars -->
+      <div class="tracker-goals-bar">
+        <div class="tgoal-card">
+          <div class="tgoal-label">Calories</div>
+          <div class="tgoal-numbers"><strong id="t-cal-eaten">0</strong> <span>/ <span id="t-cal-goal">—</span> kcal</span></div>
+          <div class="prog-bar-wrap"><div class="prog-bar" id="pb-cal" style="width:0%;background:var(--accent)"></div></div>
+          <div class="prog-remaining" id="pr-cal">— remaining</div>
+        </div>
+        <div class="tgoal-card">
+          <div class="tgoal-label">Protein</div>
+          <div class="tgoal-numbers"><strong id="t-pro-eaten">0</strong> <span>/ <span id="t-pro-goal">—</span> g</span></div>
+          <div class="prog-bar-wrap"><div class="prog-bar" id="pb-pro" style="width:0%;background:var(--accent)"></div></div>
+          <div class="prog-remaining" id="pr-pro">— remaining</div>
+        </div>
+        <div class="tgoal-card">
+          <div class="tgoal-label">Carbs</div>
+          <div class="tgoal-numbers"><strong id="t-carb-eaten">0</strong> <span>/ <span id="t-carb-goal">—</span> g</span></div>
+          <div class="prog-bar-wrap"><div class="prog-bar" id="pb-carb" style="width:0%;background:var(--accent2)"></div></div>
+          <div class="prog-remaining" id="pr-carb">— remaining</div>
+        </div>
+        <div class="tgoal-card">
+          <div class="tgoal-label">Fat</div>
+          <div class="tgoal-numbers"><strong id="t-fat-eaten">0</strong> <span>/ <span id="t-fat-goal">—</span> g</span></div>
+          <div class="prog-bar-wrap"><div class="prog-bar" id="pb-fat" style="width:0%;background:var(--accent3)"></div></div>
+          <div class="prog-remaining" id="pr-fat">— remaining</div>
+        </div>
+        <div class="tgoal-card">
+          <div class="tgoal-label">Fibre</div>
+          <div class="tgoal-numbers"><strong id="t-fib-eaten">0</strong> <span>/ <span id="t-fib-goal">—</span> g</span></div>
+          <div class="prog-bar-wrap"><div class="prog-bar" id="pb-fib" style="width:0%;background:#a78bfa"></div></div>
+          <div class="prog-remaining" id="pr-fib">— remaining</div>
+        </div>
+      </div>
+
+      <!-- Add meal -->
+      <div class="tracker-add-card">
+        <div class="tracker-add-title">➕ Log a Meal</div>
+
+        <div class="meal-type-row">
+          <button class="meal-type-btn active" onclick="selectMealType(this,'Breakfast')">🌅 Breakfast</button>
+          <button class="meal-type-btn" onclick="selectMealType(this,'Lunch')">☀️ Lunch</button>
+          <button class="meal-type-btn" onclick="selectMealType(this,'Dinner')">🌙 Dinner</button>
+          <button class="meal-type-btn" onclick="selectMealType(this,'Snack')">🍎 Snack</button>
+          <button class="meal-type-btn" onclick="selectMealType(this,'Pre-Workout')">💪 Pre-Workout</button>
+          <button class="meal-type-btn" onclick="selectMealType(this,'Post-Workout')">🥤 Post-Workout</button>
+        </div>
+
+        <div class="meal-inputs">
+          <div class="field">
+            <label>Food Name</label>
+            <input type="text" id="food-name" placeholder="e.g. Chicken breast">
+          </div>
+          <div class="field">
+            <label>Calories (kcal)</label>
+            <input type="number" id="food-cal" placeholder="0" min="0">
+          </div>
+          <div class="field">
+            <label>Protein (g)</label>
+            <input type="number" id="food-pro" placeholder="0" min="0">
+          </div>
+          <div class="field">
+            <label>Carbs (g)</label>
+            <input type="number" id="food-carb" placeholder="0" min="0">
+          </div>
+          <div class="field">
+            <label>Fat (g)</label>
+            <input type="number" id="food-fat" placeholder="0" min="0">
+          </div>
+          <div class="field">
+            <label>Fibre (g)</label>
+            <input type="number" id="food-fib" placeholder="0" min="0">
+          </div>
+          <button class="add-meal-btn" onclick="addMealEntry()" style="grid-column:span 1">Add →</button>
+        </div>
+
+        <div class="quick-add-label">Quick Add</div>
+        <div class="quick-foods" id="quick-foods"></div>
+      </div>
+
+      <!-- Meal log -->
+      <div class="meal-log-section" id="meal-log-section">
+        <div class="empty-log" id="empty-log">
+          <div class="empty-icon">🍽️</div>
+          <strong>Nothing logged yet</strong><br>
+          Add your first meal above to start tracking your day.
+        </div>
+        <div id="meal-groups"></div>
+      </div>
+
+      <!-- Summary / reset -->
+      <div class="tracker-summary-card">
+        <div class="summary-left">
+          <h3>Today's Log</h3>
+          <p id="summary-text">No meals logged yet.</p>
+        </div>
+        <button class="reset-btn" onclick="resetTracker()">🗑 Reset Day</button>
+      </div>
+
+    </div>
+  </div>
+
 </main>
 
 <script>
   let selectedGoal = 'maintain';
   let unitSystem = 'metric';
+
+  /* ── MACRO TRACKER ── */
+  let mealLog = [];       // { id, type, name, cal, pro, carb, fat, fib }
+  let selectedMealType = 'Breakfast';
+  let trackerGoals = { cal: 0, pro: 0, carb: 0, fat: 0, fib: 0 };
+
+  const QUICK_FOODS = [
+    { name:'Chicken Breast 100g', cal:165, pro:31, carb:0, fat:3.6, fib:0 },
+    { name:'Brown Rice 100g', cal:111, pro:2.6, carb:23, fat:0.9, fib:1.8 },
+    { name:'Whole Egg', cal:78, pro:6.5, carb:0.6, fat:5.3, fib:0 },
+    { name:'Paneer 100g', cal:265, pro:18, carb:1.2, fat:20, fib:0 },
+    { name:'Oats 50g', cal:190, pro:6.5, carb:33, fat:3.5, fib:5 },
+    { name:'Dal cooked 100g', cal:116, pro:9, carb:20, fat:0.4, fib:7.9 },
+    { name:'Banana', cal:105, pro:1.3, carb:27, fat:0.3, fib:3.1 },
+    { name:'Greek Yoghurt 150g', cal:90, pro:15, carb:5.4, fat:0.6, fib:0 },
+    { name:'Almonds 30g', cal:174, pro:6, carb:6, fat:14, fib:3.5 },
+    { name:'Sweet Potato 100g', cal:86, pro:1.6, carb:20, fat:0.1, fib:3 },
+    { name:'Roti (1 medium)', cal:80, pro:3, carb:20, fat:1, fib:2.5 },
+    { name:'Whey Scoop 30g', cal:120, pro:24, carb:2, fat:1.5, fib:0 },
+  ];
+
+  function initQuickFoods() {
+    const wrap = document.getElementById('quick-foods');
+    wrap.innerHTML = '';
+    QUICK_FOODS.forEach(f => {
+      const btn = document.createElement('button');
+      btn.className = 'quick-food-btn';
+      btn.textContent = f.name;
+      btn.onclick = () => {
+        document.getElementById('food-name').value = f.name;
+        document.getElementById('food-cal').value = f.cal;
+        document.getElementById('food-pro').value = f.pro;
+        document.getElementById('food-carb').value = f.carb;
+        document.getElementById('food-fat').value = f.fat;
+        document.getElementById('food-fib').value = f.fib;
+      };
+      wrap.appendChild(btn);
+    });
+  }
+
+  function selectMealType(btn, type) {
+    document.querySelectorAll('.meal-type-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedMealType = type;
+  }
+
+  function addMealEntry() {
+    const name = document.getElementById('food-name').value.trim();
+    if (!name) { document.getElementById('food-name').style.borderColor='var(--accent4)'; setTimeout(()=>document.getElementById('food-name').style.borderColor='',1500); return; }
+    const entry = {
+      id: Date.now(),
+      type: selectedMealType,
+      name,
+      cal:  parseFloat(document.getElementById('food-cal').value)  || 0,
+      pro:  parseFloat(document.getElementById('food-pro').value)  || 0,
+      carb: parseFloat(document.getElementById('food-carb').value) || 0,
+      fat:  parseFloat(document.getElementById('food-fat').value)  || 0,
+      fib:  parseFloat(document.getElementById('food-fib').value)  || 0,
+    };
+    mealLog.push(entry);
+    // Clear inputs
+    ['food-name','food-cal','food-pro','food-carb','food-fat','food-fib'].forEach(id => document.getElementById(id).value = '');
+    renderTracker();
+  }
+
+  function deleteMealEntry(id) {
+    mealLog = mealLog.filter(e => e.id !== id);
+    renderTracker();
+  }
+
+  function resetTracker() {
+    if (mealLog.length === 0) return;
+    if (!confirm('Reset today\'s log? This cannot be undone.')) return;
+    mealLog = [];
+    renderTracker();
+  }
+
+  function renderTracker() {
+    // Totals
+    const totals = mealLog.reduce((acc, e) => {
+      acc.cal += e.cal; acc.pro += e.pro; acc.carb += e.carb; acc.fat += e.fat; acc.fib += e.fib;
+      return acc;
+    }, { cal:0, pro:0, carb:0, fat:0, fib:0 });
+
+    const keys = ['cal','pro','carb','fat','fib'];
+    const ids  = ['cal','pro','carb','fat','fib'];
+    const goalKeys = ['cal','pro','carb','fat','fib'];
+
+    keys.forEach((k, i) => {
+      const eaten = Math.round(totals[k] * 10) / 10;
+      const goal  = trackerGoals[k];
+      document.getElementById(`t-${ids[i]}-eaten`).textContent = eaten;
+      const pct = goal > 0 ? Math.min((eaten / goal) * 100, 100) : 0;
+      const pb = document.getElementById(`pb-${ids[i]}`);
+      pb.style.width = pct + '%';
+      const isOver = goal > 0 && eaten > goal;
+      pb.classList.toggle('prog-over', isOver);
+      const pr = document.getElementById(`pr-${ids[i]}`);
+      if (goal > 0) {
+        const rem = Math.round((goal - eaten) * 10) / 10;
+        pr.textContent = isOver ? `${Math.abs(rem)} over` : `${rem} remaining`;
+        pr.classList.toggle('over', isOver);
+      } else {
+        pr.textContent = 'No goal set';
+      }
+    });
+
+    // Summary text
+    const count = mealLog.length;
+    const summaryEl = document.getElementById('summary-text');
+    if (count === 0) {
+      summaryEl.textContent = 'No meals logged yet.';
+    } else {
+      summaryEl.textContent = `${count} item${count>1?'s':''} logged — ${Math.round(totals.cal)} kcal · ${Math.round(totals.pro)}g protein · ${Math.round(totals.carb)}g carbs · ${Math.round(totals.fat)}g fat`;
+    }
+
+    // Empty state
+    document.getElementById('empty-log').style.display = count === 0 ? 'block' : 'none';
+
+    // Group by meal type
+    const ORDER = ['Breakfast','Lunch','Dinner','Snack','Pre-Workout','Post-Workout'];
+    const groups = {};
+    mealLog.forEach(e => { if (!groups[e.type]) groups[e.type] = []; groups[e.type].push(e); });
+
+    const container = document.getElementById('meal-groups');
+    container.innerHTML = '';
+
+    ORDER.filter(t => groups[t]).forEach(type => {
+      const items = groups[type];
+      const gTotals = items.reduce((a,e) => { a.cal+=e.cal; a.pro+=e.pro; a.carb+=e.carb; a.fat+=e.fat; return a; }, {cal:0,pro:0,carb:0,fat:0});
+
+      const grp = document.createElement('div');
+      grp.className = 'meal-group';
+      grp.innerHTML = `
+        <div class="meal-group-header">
+          <span class="meal-group-name">${type}</span>
+          <span class="meal-group-total">${Math.round(gTotals.cal)} kcal · ${Math.round(gTotals.pro)}g P · ${Math.round(gTotals.carb)}g C · ${Math.round(gTotals.fat)}g F</span>
+        </div>
+        <table class="meal-log-table">
+          <thead><tr><th>Food</th><th>kcal</th><th>Protein</th><th>Carbs</th><th>Fat</th><th>Fibre</th><th></th></tr></thead>
+          <tbody>${items.map(e => `
+            <tr>
+              <td><strong>${e.name}</strong></td>
+              <td>${e.cal}</td>
+              <td style="color:var(--accent)">${e.pro}g</td>
+              <td style="color:var(--accent2)">${e.carb}g</td>
+              <td style="color:var(--accent3)">${e.fat}g</td>
+              <td style="color:#a78bfa">${e.fib}g</td>
+              <td><button class="del-btn" onclick="deleteMealEntry(${e.id})" title="Remove">✕</button></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>`;
+      container.appendChild(grp);
+    });
+  }
+
+  function setTrackerGoals(cal, pro, carb, fat, fib) {
+    trackerGoals = { cal, pro, carb, fat, fib };
+    document.getElementById('t-cal-goal').textContent  = cal;
+    document.getElementById('t-pro-goal').textContent  = pro;
+    document.getElementById('t-carb-goal').textContent = carb;
+    document.getElementById('t-fat-goal').textContent  = fat;
+    document.getElementById('t-fib-goal').textContent  = fib;
+    document.getElementById('goals-tip').style.display = 'none';
+    renderTracker();
+  }
+
+  /* ── Waitlist notify ── */
+  function handleNotify() {
+    const email = document.getElementById('notify-email').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('notify-email').style.borderColor = 'var(--accent4)';
+      setTimeout(() => document.getElementById('notify-email').style.borderColor = '', 1500);
+      return;
+    }
+    document.querySelector('.notify-form').style.display = 'none';
+    document.getElementById('notify-success').style.display = 'block';
+    // Increment count visually
+    const el = document.getElementById('waitlist-count');
+    el.textContent = parseInt(el.textContent) + 1;
+  }
 
   /* ── Sidebar / mobile toggle ── */
   function toggleSidebar() {
@@ -559,14 +1222,21 @@
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
     document.getElementById('nav-' + id).classList.add('active');
+    if (id === 'tracker' && trackerGoals.cal === 0) {
+      document.getElementById('goals-tip').style.display = 'flex';
+    }
     // Close sidebar on mobile after navigation
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 960) {
       document.getElementById('sidebar').classList.remove('open');
       document.getElementById('sidebar-overlay').classList.remove('show');
       document.getElementById('hamburger').classList.remove('open');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  // Init on load
+  initQuickFoods();
+  renderTracker();
 
   /* ── Unit system ── */
   function setUnitSystem(sys) {
@@ -717,6 +1387,9 @@
     const rc=document.getElementById('results-card');
     rc.classList.add('show');
     rc.scrollIntoView({behavior:'smooth',block:'nearest'});
+
+    // Auto-populate tracker goals
+    setTrackerGoals(calories, protein, Math.max(carbs,50), fat, fibre);
   }
 </script>
 </body>
